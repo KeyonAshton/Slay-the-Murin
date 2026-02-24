@@ -1,0 +1,16 @@
+{
+  "${ModID}:Popo": {
+    "NAME": "Popo",
+    "FLAVOR": "TODO: make this a sweet relic.",
+    "DESCRIPTIONS": [
+      "Has no effect."
+    ]
+  },
+  "${ModID}:CrazyFootwear": {
+    "NAME": "Crazy Footwear",
+    "FLAVOR": "TODO: make this a sweet relic.",
+    "DESCRIPTIONS": [
+      "Has no effect."
+    ]
+  }
+}
