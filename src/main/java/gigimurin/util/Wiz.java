@@ -295,4 +295,13 @@ public class Wiz {
         int d = AbstractDungeon.actionManager.cardsPlayedThisTurn.size();
         return d > slot && AbstractDungeon.actionManager.cardsPlayedThisTurn.get(d - slot).cardID.equals(cardID);
     }
+
+    public static boolean isBossFight() {
+        for(AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            if (m.type == AbstractMonster.EnemyType.BOSS) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

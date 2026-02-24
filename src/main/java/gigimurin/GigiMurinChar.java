@@ -3,36 +3,46 @@ package gigimurin;
 import basemod.abstracts.CustomEnergyOrb;
 import basemod.abstracts.CustomPlayer;
 import basemod.animations.SpriterAnimation;
+import basemod.interfaces.OnStartBattleSubscriber;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.EnergyManager;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import gigimurin.cards.starter.Defend;
 import gigimurin.cards.starter.Strike;
-import gigimurin.relics.Popo;
+import gigimurin.relics.CrazyFootwear;
 
 import java.util.ArrayList;
 
 import static gigimurin.GigiMurinChar.Enums.GIGI_COLOR;
 import static gigimurin.GigiMurinMain.*;
 
-public class GigiMurinChar extends CustomPlayer {
+public class GigiMurinChar extends CustomPlayer implements
+        OnStartBattleSubscriber {
 
     static final String ID = makeID("GigiMurin");
     static final CharacterStrings characterStrings = CardCrawlGame.languagePack.getCharacterString(ID);
     static final String[] NAMES = characterStrings.NAMES;
     static final String[] TEXT = characterStrings.TEXT;
+    public static boolean gotTheRing = false;
+    public static boolean lostTheRing = false;
+    static int ringStrengthAmount = 4;
 
 
     public GigiMurinChar(String name, PlayerClass setClass) {
@@ -70,7 +80,7 @@ public class GigiMurinChar extends CustomPlayer {
 
     public ArrayList<String> getStartingRelics() {
         ArrayList<String> retVal = new ArrayList<>();
-        retVal.add(Popo.ID);
+        retVal.add(CrazyFootwear.ID);
         return retVal;
     }
 
@@ -167,6 +177,16 @@ public class GigiMurinChar extends CustomPlayer {
     @Override
     public String getVampireText() {
         return TEXT[2];
+    }
+
+    @Override
+    public void receiveOnBattleStart(AbstractRoom abstractRoom) {
+        if(gotTheRing && lostTheRing && AbstractDungeon.actNum == 4) {
+            for(AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                m.addPower(new StrengthPower(m, ringStrengthAmount));
+            }
+            AbstractDungeon.onModifyPower();
+        }
     }
 
     public static class Enums {

@@ -1,16 +1,29 @@
 {
-  "${ModID}:Popo": {
-    "NAME": "Popo",
-    "FLAVOR": "TODO: make this a sweet relic.",
-    "DESCRIPTIONS": [
-      "Has no effect."
-    ]
-  },
   "${ModID}:CrazyFootwear": {
     "NAME": "Crazy Footwear",
-    "FLAVOR": "TODO: make this a sweet relic.",
+    "FLAVOR": "Fans on the feet cause why not.",
     "DESCRIPTIONS": [
-      "Has no effect."
+      "Gain ",
+      " temporary #yDexterity for the first ",
+      " turns of combat."
+    ]
+  },
+  "${ModID}:Shoebox": {
+    "NAME": "Shoebox",
+    "FLAVOR": "The home of all us grems.",
+    "DESCRIPTIONS": [
+      "Start each combat with a random #yGrem."
+    ]
+  },
+  "${ModID}:TheRing": {
+    "NAME": "The Ring",
+    "FLAVOR": "There is no volcano.",
+    "DESCRIPTIONS": [
+      "Gain [E] at the start of your turn.",
+      "Enemies in Boss fights start with ",
+      "If removed without being thrown into a lava pit, Neow starts combat with ",
+      " #yStrength.",
+      "Throw #yThe #yRing into a volcano to destroy it, or else great danger awaits."
     ]
   }
 }
